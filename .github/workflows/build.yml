@@ -2,19 +2,14 @@ name: Build APK
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Install deps
-        run: |
-          sudo apt update
-          sudo apt install -y openjdk-17-jdk zip unzip
-      - name: Build
-        uses: ArtemSBulgakov/buildozer-action@v1
-        with:
-         command: buildozer android debug
-          buildozer_version: stable
-      - uses: actions/upload-artifact@v4
-        with:
-          name: APK
-          path: bin/*.apk
+    - uses: actions/checkout@v4
+    - uses: ArtemSBulgakov/buildozer-action@v1
+      with:
+        command: buildozer android debug
+        buildozer_version: stable
+    - uses: actions/upload-artifact@v4
+      with:
+        name: APK
+        path: bin/*.apk
