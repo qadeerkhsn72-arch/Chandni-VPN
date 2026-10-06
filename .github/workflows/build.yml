@@ -1,15 +1,15 @@
-name: Build APK
+name: Build
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v4
-    - uses: ArtemSBulgakov/buildozer-action@v1
-      with:
-        command: buildozer android debug
-        buildozer_version: stable
-    - uses: actions/upload-artifact@v4
-      with:
-        name: APK
-        path: bin/*.apk
+      - uses: actions/checkout@v4
+      - run: sudo apt update
+      - run: sudo apt install -y  openjdk-17-jdk
+      - run: pip install buildozer
+      - run: buildozer android debug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: APK
+          path: bin/*.apk
