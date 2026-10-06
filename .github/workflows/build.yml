@@ -19,8 +19,7 @@ jobs:
       - name: Build APK
         run: buildozer android debug
       - name: Upload APK
-        uses:     - name: Upload APK
-      uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: Chandni-VPN-APK
           path: bin/*.apk
